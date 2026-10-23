@@ -1,0 +1,41 @@
+{
+  "name": "@gazebohq/sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Headless TypeScript client for Gazebo account and agent APIs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gazebohq/gazebo-sdk.git",
+    "directory": "lib/gazebo-sdk"
+  },
+  "homepage": "https://gazebohq.com/docs/sdk",
+  "bugs": { "url": "https://github.com/gazebohq/gazebo-sdk/issues" },
+  "keywords": ["gazebo", "ai-agents", "credentials", "sdk"],
+  "sideEffects": false,
+  "engines": { "node": ">=20" },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./consent": {
+      "types": "./dist/consent.d.ts",
+      "import": "./dist/consent.js",
+      "default": "./dist/consent.js"
+    }
+  },
+  "files": ["dist", "src", "examples", "scripts/build.mjs", "tsconfig.build.json", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "25.6.2",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}

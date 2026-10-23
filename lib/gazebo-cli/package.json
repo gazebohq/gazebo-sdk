@@ -1,0 +1,27 @@
+{
+  "name": "@gazebohq/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Gazebo command-line interface backed by the TypeScript SDK",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gazebohq/gazebo-sdk.git",
+    "directory": "lib/gazebo-cli"
+  },
+  "homepage": "https://gazebohq.com/docs/cli",
+  "bugs": { "url": "https://github.com/gazebohq/gazebo-sdk/issues" },
+  "keywords": ["gazebo", "ai-agents", "credentials", "cli"],
+  "engines": { "node": ">=20" },
+  "bin": { "gazebo": "./dist/bin.js" },
+  "files": ["dist", "src", "scripts/build.mjs", "tsconfig.build.json", "README.md", "LICENSE"],
+  "scripts": {
+    "dev": "tsx src/bin.ts",
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "dependencies": { "@gazebohq/sdk": "workspace:^0.1.0" },
+  "devDependencies": { "@types/node": "25.6.2", "tsx": "4.23.15", "typescript": "5.9.3" }
+}

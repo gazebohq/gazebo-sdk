@@ -1,0 +1,15 @@
+{
+  "name": "gazebo-sdk-source",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "packageManager": "pnpm@10.34.2",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "pnpm --filter @gazebohq/sdk build && pnpm --filter @gazebohq/cli build",
+    "typecheck": "pnpm --filter @gazebohq/sdk typecheck && pnpm --filter @gazebohq/cli typecheck",
+    "test:unit": "pnpm --filter @gazebohq/sdk test && pnpm --filter @gazebohq/cli test && node --test lib/gazebo-sdk/test/quickstarts.test.mjs",
+    "test": "pnpm run build && pnpm run test:unit",
+    "check": "pnpm run build && pnpm run typecheck && pnpm run test:unit"
+  }
+}
