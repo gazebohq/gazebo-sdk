@@ -1,5 +1,11 @@
 # Gazebo TypeScript SDK
 
+Gazebo manages credential access for AI agents. Choose which service keys each agent can retrieve, manage access centrally, and review credential-access history.
+
+`@gazebohq/sdk` is the official JavaScript and TypeScript client for Gazebo. Add account automation and scoped credential retrieval to your server-side applications without writing an API client from scratch.
+
+**[Get started with Gazebo](https://gazebohq.com/docs/sdk)**
+
 
 Dependency-free, ESM, Node.js 20+. This is a server-side client: never expose account or agent tokens in browser bundles.
 
