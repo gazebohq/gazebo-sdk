@@ -4,14 +4,13 @@ TypeScript SDK and command-line tools for Gazebo.
 
 | Package | Purpose |
 | --- | --- |
-| `@gazebohq/sdk` | Scoped credential retrieval, supported account operations, and server-side Agent Consent Flow helpers |
+| `@gazebohq/sdk` | Account management, scoped credential retrieval, and server-side consent helpers |
 | `@gazebohq/cli` | Terminal and scripting interface built on the SDK |
 
 ## Documentation
 
 - [SDK guide](https://gazebohq.com/docs/sdk)
 - [CLI guide](https://gazebohq.com/docs/cli)
-- [Agent Consent Flow](https://gazebohq.com/docs/consent)
 - [SDK source and reference](lib/gazebo-sdk/README.md)
 - [CLI source and command reference](lib/gazebo-cli/README.md)
 
