@@ -1,7 +1,7 @@
 {
   "name": "@gazebohq/sdk",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.1",
+  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
   "type": "module",
   "description": "Headless TypeScript client for Gazebo account and agent APIs",
   "license": "MIT",
@@ -12,7 +12,7 @@
   },
   "homepage": "https://gazebohq.com/docs/sdk",
   "bugs": { "url": "https://github.com/gazebohq/gazebo-sdk/issues" },
-  "keywords": ["gazebo", "ai-agents", "credentials", "sdk"],
+  "keywords": ["gazebo", "ai-agents", "agent-identity", "credentials", "credential-management", "api-keys", "access-control", "typescript", "sdk"],
   "sideEffects": false,
   "engines": { "node": ">=20" },
   "exports": {

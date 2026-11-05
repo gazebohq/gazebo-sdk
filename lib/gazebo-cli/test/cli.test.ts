@@ -56,6 +56,8 @@ async function cli(args: string[], overrides: Partial<CliContext> = {}) {
 test("help needs no token and sends no request", async () => {
   const result = await cli(["--help"], { env: {} });
   assert.equal(result.exit, 0);
+  assert.ok(result.out.startsWith("Gazebo CLI\n"));
+  assert.doesNotMatch(result.out, /internal, unpublished/);
   assert.match(result.out, /access set/);
   assert.match(result.out, /GAZEBO_AGENT_TOKEN/);
   assert.equal(requests.length, 0);
