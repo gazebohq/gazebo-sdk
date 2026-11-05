@@ -86,7 +86,7 @@ export function auditFilters(flags: Flags): AuditFilters {
   };
 }
 
-export const help = `Gazebo CLI (internal, unpublished)
+export const help = `Gazebo CLI
 
 Usage: gazebo <command> [arguments] [options]
 

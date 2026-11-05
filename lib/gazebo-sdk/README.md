@@ -4,14 +4,15 @@ Gazebo manages credential access for AI agents. Choose which service keys each a
 
 `@gazebohq/sdk` is the official JavaScript and TypeScript client for Gazebo. Add account automation and scoped credential retrieval to your server-side applications without writing an API client from scratch.
 
-**[Get started with Gazebo](https://gazebohq.com/docs/sdk)**
+**[Website](https://gazebohq.com) · [SDK guide](https://gazebohq.com/docs/sdk)**
 
+Install with `npm install @gazebohq/sdk`.
 
 Dependency-free, ESM-only, server-side Node.js client. Use maintained Node.js 22 or 24. Node.js 20 compatibility has been tested, but it is no longer a recommended deployment target. Never expose account or agent tokens in browser bundles.
 
 ## Support and versioning
 
-The first release is planned as `0.1.0`. Before `1.0`, fixes use patch releases (for example, `0.1.1`); breaking changes use minor releases (for example, `0.2.0`) and are documented in release notes. SDK and CLI versions may advance independently, with GitHub release tags such as `sdk-v0.1.0` and `cli-v0.1.0`.
+The first release is `0.1.0`. Before `1.0`, fixes use patch releases (for example, `0.1.1`); breaking changes use minor releases (for example, `0.2.0`) and are documented in release notes. SDK and CLI versions may advance independently, with GitHub release tags such as `sdk-v0.1.0` and `cli-v0.1.0`.
 
 Report ordinary bugs through [GitHub Issues](https://github.com/gazebohq/gazebo-sdk/issues). Report vulnerabilities privately through [GitHub security reporting](https://github.com/gazebohq/gazebo-sdk/security/advisories/new), not public issues. There are no guaranteed response times or long-term support commitments.
 
@@ -167,6 +168,7 @@ pnpm --filter @gazebohq/sdk build
 
 Tests use a local HTTP server and synthetic tokens. Cloud URL construction is tested with an injected transport, not a live account. 
 
+The CLI package `@gazebohq/cli` uses this SDK for all HTTP operations.
 
 License: MIT. Copyright notice: Gazebo contributors.
 

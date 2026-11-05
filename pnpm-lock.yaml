@@ -11,7 +11,7 @@ importers:
   lib/gazebo-cli:
     dependencies:
       '@gazebohq/sdk':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../gazebo-sdk
     devDependencies:
       '@types/node':
