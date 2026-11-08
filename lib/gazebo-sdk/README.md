@@ -156,6 +156,21 @@ node node_modules/@gazebohq/sdk/examples/agent.mjs --retrieve
 
 Supply `GAZEBO_ACCOUNT_TOKEN` for the account example; it reads identity, services, agents, and one audit page without making changes. Supply `GAZEBO_AGENT_TOKEN` and `GAZEBO_SERVICE` for the agent example. The latter retrieves a credential and creates an audit event, but prints only service/key-name metadata, never the value. Both optionally use `GAZEBO_ENDPOINT`; default is Gazebo Cloud. 
 
+### Backend action example
+
+[`examples/backend-action.mjs`](examples/backend-action.mjs) shows a trusted backend retrieving a Stripe credential, making one fixed read-only provider request and returning selected balance fields rather than the key. It supports either a server-owned agent client or a backend-managed consent client, selected only after your application's authentication and action authorization.
+
+From a source checkout with dependencies installed and the SDK built:
+
+```sh
+node lib/gazebo-sdk/examples/backend-action.mjs --demo
+node --test lib/gazebo-sdk/test/backend-action.test.mjs
+```
+
+Alternatively, copy the example into a server application with the current `@gazebohq/sdk` installed and run `node backend-action.mjs --demo`. The demo uses fictional data and injected transports; it makes no network calls and reads no environment credentials. This source example does not require a new npm release.
+
+For real use, import `createBalanceTool` and supply `clientForSession`: authenticate the application session, authorize balance access and return only that user's scoped client. See [`examples/connect-application.ts`](examples/connect-application.ts) for backend-managed connections. Never let the model supply a customer ID or invoke credential retrieval directly through this tool. The backend holds plaintext credentials; it must be isolated from agent-controlled execution. Results may still contain sensitive business data. Gazebo records retrieval, while your backend owns provider-action logs and safe diagnostics.
+
 Compiled ESM JavaScript, declarations, MIT license, source, and a self-contained build configuration are included. To rebuild from a standalone source checkout with development dependencies installed, run `pnpm run build`. It does not require the Gazebo monorepo or emit declaration maps pointing at missing files.
 
 From this repository's root:
