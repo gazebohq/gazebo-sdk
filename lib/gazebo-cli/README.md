@@ -107,7 +107,49 @@ No `--token` option: command-line arguments can appear in shell history or proce
 
 Agent deletion blocks future retrieval, not use of keys already retrieved. A leaked provider key may need provider-side revocation or rotation. Audit output describes credential access, not all downstream actions.
 
-Setup is manual: connect services in the dashboard and securely supply the appropriate token. Keep users' agent tokens separate; do not use an account administration token as their runtime credential. There is no automatic account-connect/consent flow or provider request proxy.
+Securely supply the appropriate token. Services can be connected in the dashboard
+or through the service credential commands described below (0.1.2 or newer).
+Keep users' agent tokens separate; do not use an account administration
+token as their runtime credential. The CLI has no automatic browser consent flow
+or provider request proxy.
+
+
+## Service credential management (0.1.2)
+
+These commands require CLI 0.1.2 or newer. After building the workspace SDK and CLI:
+
+```sh
+node lib/gazebo-cli/dist/bin.js services credentials test stripe --input-file /private/credentials.json --json
+node lib/gazebo-cli/dist/bin.js services credentials replace stripe --input-file /private/credentials.json --yes --json
+node lib/gazebo-cli/dist/bin.js services credentials delete stripe --yes --json
+```
+
+The input file contains a nonempty JSON array, for example
+`[{"keyName":"api_key","value":"FICTIONAL_EXAMPLE_ONLY"}]`.
+Read real values from a trusted secret store; do not paste them into a model
+conversation or put them in shell arguments. `--input-file -` accepts piped stdin.
+Input is bounded to 64 KiB; malformed JSON, duplicate/empty names, empty values
+and unexpected fields fail locally. Authentication still uses an account-token
+environment variable or a separate token file, never a scoped agent token.
+
+**`replace` replaces ALL keys for the service, not a merge.** Omitted keys are
+removed; existing agents may depend on them. Both replacement and deletion
+require `--yes`. Neither invalidates previously retrieved provider keys.
+Do not use generic replacement as a provider OAuth connect/refresh mechanism.
+There is no atomic create-only operation or automatic rollback of a multi-step
+setup; report completed stages and avoid deleting shared services on failure.
+
+`test` checks supplied credentials without saving. Verified success exits 0;
+unsupported remote verification exits 1 with `not_verified`; an HTTP-200 failed
+test exits 1 with `verification_failed`; HTTP/transport failures retain their
+normal structured error codes. Failed/skipped tests write to stderr, not stdout.
+An unsupported remote test is not proof a key is valid. Testing and replacement
+are independent requests. Supplied credentials and raw server errors are not
+echoed by these commands.
+
+File/stdin input avoids putting secrets in process arguments, but the CLI process,
+its host and any agent with access to the input can still read them. No secure
+secret handoff or model isolation is implied.
 
 ## Development
 

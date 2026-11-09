@@ -1,6 +1,6 @@
 {
   "name": "@gazebohq/cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
   "type": "module",
   "description": "Gazebo command-line interface backed by the TypeScript SDK",
@@ -22,6 +22,6 @@
     "typecheck": "tsc --noEmit -p tsconfig.test.json",
     "test": "tsx --test test/*.test.ts"
   },
-  "dependencies": { "@gazebohq/sdk": "workspace:^0.1.1" },
+  "dependencies": { "@gazebohq/sdk": "workspace:^0.1.2" },
   "devDependencies": { "@types/node": "25.6.2", "tsx": "4.23.15", "typescript": "5.9.3" }
 }

@@ -41,6 +41,10 @@ export interface CreatedAgent {
 }
 export interface CreateAgentInput { name: string; expiresAt?: Timestamp | null }
 export interface Service { service: string; connectedAt: Timestamp; keyType: "oauth" | "api_key" }
+export interface ServiceCredential { keyName: string; value: string }
+export type CredentialTestResult =
+  | { ok: true; verified: boolean }
+  | { ok: false; error: string };
 export interface AccessPolicy { service: string; enabled: boolean; methods: HttpMethod[] }
 /** Explicit methods avoid the server's broad default on replacement updates. */
 export interface SetAccessInput { enabled: boolean; methods: HttpMethod[] }
@@ -76,7 +80,14 @@ export interface AccountOperations {
     create(input: CreateAgentInput, options?: RequestOptions): Promise<CreatedAgent>;
     delete(id: string, options?: RequestOptions): Promise<Ok>;
   };
-  services: { list(options?: RequestOptions): Promise<Service[]> };
+  services: {
+    list(options?: RequestOptions): Promise<Service[]>;
+    /** Replaces ALL named credentials for this service, not a merge. */
+    replaceCredentials(service: string, credentials: ServiceCredential[], options?: RequestOptions): Promise<Ok>;
+    testCredentials(service: string, credentials: ServiceCredential[], options?: RequestOptions): Promise<CredentialTestResult>;
+    /** Removes ALL credentials; does not revoke keys at the provider. */
+    deleteCredentials(service: string, options?: RequestOptions): Promise<Ok>;
+  };
   access: {
     get(agentId: string, options?: RequestOptions): Promise<AccessPolicy[]>;
     set(agentId: string, service: string, input: SetAccessInput, options?: RequestOptions): Promise<Ok>;

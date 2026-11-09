@@ -1,6 +1,6 @@
 {
   "name": "@gazebohq/sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
   "type": "module",
   "description": "Headless TypeScript client for Gazebo account and agent APIs",
