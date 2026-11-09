@@ -1,4 +1,5 @@
 import { Transport } from "./transport.js";
+import { serviceCredentialOperations } from "./service-credentials.js";
 import * as v from "./validation.js";
 import type {
   Account, Agent, CreatedAgent, Service, AccessPolicy, Ok, AuditPage, Credentials,
@@ -89,7 +90,10 @@ function createClient<T extends AuthType>(options: GazeboOptions<T>): Operations
       },
       delete: (id, options) => http.request<Ok>("account", "DELETE", `/api/v1/agents/${v.segment(id, "id")}`, v.okResponse, options),
     },
-    services: { list: options => http.request<Service[]>("account", "GET", "/api/v1/services", v.servicesResponse, options) },
+    services: {
+      list: options => http.request<Service[]>("account", "GET", "/api/v1/services", v.servicesResponse, options),
+      ...serviceCredentialOperations(http),
+    },
     access: {
       get: (id, options) => http.request<AccessPolicy[]>("account", "GET", `/api/v1/agents/${v.segment(id, "agentId")}/access`, v.accessResponse, options),
       async set(id, service, input, options) {

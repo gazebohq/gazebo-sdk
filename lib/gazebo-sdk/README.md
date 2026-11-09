@@ -39,6 +39,29 @@ await gazebo.agents.delete(created.id);
 
 `access.set` replaces a policy; an explicit nonempty methods list is required even when disabling access. The HTTP API's omitted-method default grants all five supported methods, so the SDK intentionally has no implicit default.
 
+## Service credential lifecycle (0.1.2)
+
+Account clients can also call `services.testCredentials(service, credentials)`,
+`services.replaceCredentials(service, credentials)` and
+`services.deleteCredentials(service)`. Supply a nonempty array of
+`{ keyName, value }` objects from trusted server-side storage; do not log it.
+
+**Replacement replaces the complete named-key set, not one key or a merge.**
+Omitted keys are removed. Deletion removes all stored keys for the service;
+neither operation revokes provider-side keys. These operations require an account
+token and return metadata only. Do not use generic replacement to manage an
+existing provider OAuth token/refresh pair.
+
+Testing does not store credentials. Its typed result is `{ ok: true, verified: true }`,
+`{ ok: true, verified: false }` (no supported remote test), or `{ ok: false, error }`.
+The error is deliberately generic; provider failure text and extra fields are
+not returned. A successful test and subsequent replacement are separate calls,
+not an atomic provisioning transaction. Callers must handle partial setup failure.
+Service names are trimmed/lowercased; duplicate or empty credential names/values
+are rejected before HTTP. No SDK retries or conditional-create semantics are added.
+
+These methods require SDK 0.1.2 or newer.
+
 ## Scoped runtime access
 
 ```ts
@@ -174,4 +197,4 @@ License: MIT. Copyright notice: Gazebo contributors.
 
 The SDK includes server-side Agent Consent Flow helpers. Applications supply their own sign-in, connection UI, callback route, encrypted storage and shared locking; see [the consent guide](https://gazebohq.com/docs/consent).
 
-Out of scope for the SDK: a ready-made browser UI, MCP wrapping, credential uploads, automatic approval polling, Python, and a local broker.
+Out of scope for the SDK: a ready-made browser UI, MCP wrapping, automatic approval polling, Python, and a local broker.
